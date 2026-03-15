@@ -1,116 +1,101 @@
 package gradebook2;
 
 import java.util.Scanner;
-import javax.security.auth.callback.ChoiceCallback;
-
 public class Grades {
-
 public static void main(String[] args) {
-	
 Scanner sc = new Scanner(System.in);
 int[] scores = new int[100];
 int count = 0;
+int choice = 0;
 
-		
-		//Menue 
-	while (true) {
+		//Menue loop
+	while (choice == 5) {
+		System.out.println("\n--- Gradebook Menu ---:");
 		System.out.println("1. Add Score");
 		System.out.println("2. View Statisitc");
 		System.out.println("3. LG Breakdown");
 		System.out.println("4. Reset Data");
 		System.out.println("5. Quit");
+		System.out.print("Selection: ");
 		
-		System.out.print("6. CHOICE?:");
+		choice = sc.nextInt();
 	
-		int choice = sc.nextInt(); 
-
 		
 		//Switch case for menu options
 		switch(choice) {
 		
 		case 1: 
-			System.out.print("Add score selected pick 0-100");
+			System.out.print("Enter score (0-100): ");
+			int inputScore = sc.nextInt ();
 			
-			
-			if(sc.hasNextInt()){
-				int score = sc.nextInt();	
-				if(score >= 0 && score <= 100) {
-					scores[score]++;
-					System.out.println("Score added: " + score);
-				} else {
-					System.out.println("Invalid score. Please enter a number between 0 and 100.");
-				}
+			while (inputScore < 0 || inputScore > 100) {
+				System.out.print("Invalid score. Please enter a number between 0 and 100: ");
+				inputScore = sc.nextInt();
 			}
+			
+			scores[count] = inputScore;
+			count++;
+			System.out.println("Score added.");
 			break;
 
 		case 2:
-			System.out.print("View Statitic selected ");
+			if(count == 0) {
+				System.out.println("No data avalible.");
+			} else { 
+				int sum = 0;
+				int min = scores[0];
+				int max = scores[0];
+				for (int i = 0; i < count; i++) {
+					sum += scores[i];
+					if (scores[i] < min) min = scores[i];
+					if (scores[i] > max) max = scores[i];
+				}
+			double average = (double) sum / count;
+			
 
+			System.out.println("Average:" + average);
+			System.out.println("Minimum:" + min);
+			System.out.println("Maximum:" + max);
 			break;
+		}
 		case 3:
-		System.out.print(" LG Breakdown selected");
-		break;
+			int a = 0; int b = 0; int c = 0; int d = 0; int f = 0;
+			 for (int i = 0; i < count; i++) {
+				 if(scores[i] >= 90 && scores[i] <= 100) {
+					 a++;
+				 } else if(scores[i] >= 80 && scores[i] < 90) {	
+					b++;
+				 } else if(scores[i] >= 70 && scores[i] < 80) {
+					 c++;
+				 } else if(scores[i] >= 60 && scores[i] < 70) {
+					 d++;
+				 } else if(scores[i] >= 0 && scores[i] < 60) {
+					 f++;
+				 }
+			 }
+			 System.out.println("LG Breakdown:");
+			 System.out.println("A: " + a);
+			 System.out.println("B: " + b);
+			 System.out.println("C: " + c);
+			 System.out.println("D: " + d);
+			 System.out.println("F: " + f);
+			break;
+
 		case 4:
-			System.out.print("Reset Data selected");
+			count = 0;
+			System.out.println("Data Reset.");
+			break;
 		
 		case 5:
-			System.out.print("Bye!");
+			System.out.println("Bye!");
 			break;
 			
 		default:
-			System.out.print("CHOICE?:");
-
-		}
-
-//Score Grade Breakdown
-
-	for (int i = 0; i < scores.length; i++) {
-		if (scores [i] >= 90 && scores [i] <= 100) {
-			System.out.println("A");
-
-		}else if(scores[i] >= 80 && scores[i] <= 90) {
-			System.out.println("B");
-
-		}else if (scores[i] >= 70 && scores	[i] <= 80 ) {
-			System.out.println("C"); 
-
-		}else if(scores[i] >= 60 && scores[i] <= 70) {
-			System.out.println("D");
-
-		}else if(scores[i] >= 0 && scores[i] <= 50 ) {
-			System.out.println("F");
-		}
-		// Statitics
-		
-		int [] array = {50,60,70,80,90,100};
-		(int i = 0; i < scores.length; i++)
-
-			 switch (min,max,avg) {
-				case 1: 
-				if(int min = average.Legth >= 60 && average.length <= 70 )
-					system.out.print("Minimum" + int min);
-				int = 0;
-					break;
-				case 2:
-				if(average.length >= 80 && average.length <=100)
-					System.out.print("Maximum" + int max);
-				int max = 0;
-					break;
-				case 3:  {
-					int  totalScores = 0;
-					int totalCount = 0;
-				double average = (double) totalScores / totalCount;
-				System.out.print("Average" + average);
-
-
-
-			
-
+			System.out.print("Invalid");
 		}
 	}
+
+//Close scanner
+	sc.close();
+	}
 }
-
-		
-			
-	
-
