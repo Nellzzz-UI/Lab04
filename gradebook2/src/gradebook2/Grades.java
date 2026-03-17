@@ -7,9 +7,8 @@ Scanner sc = new Scanner(System.in);
 int[] scores = new int[100];
 int count = 0;
 int choice = 0;
-
 		//Menue loop
-	while (choice == 5) {
+	while (choice != 5) {
 		System.out.println("\n--- Gradebook Menu ---:");
 		System.out.println("1. Add Score");
 		System.out.println("2. View Statisitc");
